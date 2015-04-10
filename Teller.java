@@ -46,7 +46,9 @@ public class Teller
                 System.out.println("--------------------------------------------------------");
                 System.out.println("1. New Customer");
                 System.out.println("2. Existing Customer");
-                System.out.println("3. Quit");
+                System.out.println("3. Customer look-up");
+                System.out.println("4. Bank Information");
+                System.out.println("5. Quit");
                 while (!intHolder.hasNextInt())
                 {
                     System.out.println("Not a valid option");
@@ -98,10 +100,79 @@ public class Teller
                         }
                     }
                 } 
-                else if (choice == 3) 
+                else if (choice == 3) //They want to look up a customer
                 {
-                    System.out.println("\nThank you for trying Friesens-JBank.\n"
-                            + "Hope to see you again soon. Good Bye.");
+                    //Get a search name
+                    System.out.println("Who would you like to search for?\n");
+                    String searchUser = stringHolder.nextLine();
+                    int search = 0;
+                    boolean searching = true;
+                    int customerLocation = -1;
+                    //Run a loop looking for the name while the search location
+                    //is less than the arraylist size and while the name hasn't
+                    //been found yet
+                    do
+                    {
+                        Customer searchCust = customers.get(search);                       
+                        FN = searchCust.getFirstName();
+                        LN = searchCust.getLastName();   
+                        //If the user matches, make sure it's the right customer
+                        //(possible duplicate names)
+                        if (FN.equalsIgnoreCase(searchUser) || 
+                                LN.equalsIgnoreCase(searchUser))
+                        {
+                            System.out.printf("\nIs %s the customer you "
+                                        + "wanted? Enter 'y' or 'n'.\n", 
+                                        searchCust.getFullName());
+                                String searchCheck = stringHolder.nextLine();
+                            //While the user has not chosen either way, keep asking
+                            while(!searchCheck.equalsIgnoreCase("y") && 
+                                    !searchCheck.equalsIgnoreCase("n"))
+                            {
+                                System.out.printf("\n%s is not a valid choice! "
+                                            + "Enter 'y' or 'n'.\n");
+                                searchCheck = stringHolder.nextLine();
+                            }
+                            if(searchCheck.equalsIgnoreCase("y"))
+                            {
+                                customerLocation = search;
+                                searching = false;
+                            }
+                            else
+                            {
+                                System.out.println("Okay, we'll look for the"
+                                        + "next customer with that name!\n");
+                                searching = true;
+                            }
+                        }
+                    }while(search < customers.size() && searching == true);
+                    
+                    if(customerLocation == -1)
+                    {
+                        System.out.println("Sorry, but there isn't a customer "
+                                + "with that name!\n");
+                        insideMenu = true;
+                    }
+                    else
+                    {
+                        Customer custSearchResult = customers.get(search);
+                        System.out.printf("\nFull name: %s. Age: %d. City: %s. "
+                                + "# of accounts: %d", 
+                                custSearchResult.getFullName(),
+                                custSearchResult.getAge(),
+                                custSearchResult.getCity(),
+                                custSearchResult.numOfAccts());
+                        quit = false;
+                    }
+                }
+                else if (choice == 4) //They want bank info
+                {
+                    
+                }
+                else if (choice == 5) 
+                {
+                    System.out.println("\nThank you for trying Error 404's "
+                            + "JBank.\n Hope to see you again soon. Good Bye.");
                     primaryMenu = true;
                     quit = true;
                 } 
@@ -110,6 +181,7 @@ public class Teller
                     System.out.println("\n\nNot a valid option. Try Again");
                 }
             }
+
 
             insideMenu = true;
             // have this account menu stay until it is exited out meaning customer left and new one is coming
