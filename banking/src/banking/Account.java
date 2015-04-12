@@ -2,20 +2,24 @@ package banking;
 /**
  *
  * @author fries_000
- * All code commented out is meant for future purposes s
+ * 
  */
 public class Account 
 {
     private double acctBalance;
     private int acctNum;
-    private final double MAXWITHDRAWAL = 1000; 
-    private int transactioncount=0;
+    private double MAXWITHDRAWAL = 1000; 
+    private int transactioncount = 0;
+    private int transactionlLimit;
+    
+    //default constructor
     public Account()
     {}
     
-    /*The Constructor for account, will create an account and add a balance to it
+    /**
+    *   The Account Constructor will create an account and add a balance to it
     *
-    *@param acctBalance the amount you want to start off with in your account
+    * @param acctBalance the amount you want to start off with in your account
     */
     public Account(double acctBalance)
     {
@@ -24,25 +28,26 @@ public class Account
     }
 
     /*
-    *This method will deposite money from your account
+    *This method will validate if the customer can deposit money into their account
     *
     *@param amount the amount you want to take out of your account
     *@return will return a boolean if transaction is possible
     */
-    public boolean deposite(double amount)
+    public boolean deposit(double amount)
     {
         if(amount<=0)
         {
-          return false;  
+            return false;  
         }
         else
         {
-        this.updateBalance("D", amount);
-        transactioncount++;
-        return true;
+            this.updateBalance("D", amount);
+            transactioncount++;
+            return true;
         }
     }
     
+    //this method will validate if the customr can withdraw from thier account
     public boolean withdraw(double amount)
     { 
         if(acctBalance<amount)
@@ -55,23 +60,27 @@ public class Account
             System.out.println("This amount is over the max withdrawal allowed.");
             return false;
         }
-        else{
-        this.updateBalance("W", amount);
-        transactioncount++;
-        return true;
+        else
+        {
+            this.updateBalance("W", amount);
+            transactioncount++;
+            return true;
         }
     }
     
+    //this method will get the balance
     public double getBalance()
     {
         return this.acctBalance;
     }
     
+    //this method will get the account number
     public int getAcctNum()
     {
         return this.acctNum;
     }
     
+    //this method will update the balance
     public boolean updateBalance(String typeOfChange, double amount)
     {
         if(typeOfChange.equals("W"))
@@ -88,13 +97,43 @@ public class Account
             return false;
         
     }
+    
+    //this method will get the number of transctions in an account
     public int getNumberofTransaction()
     {
         return this.transactioncount;
     }
+    
+    //this method will increment a transaction by one
     public void setATransaction()
     {
         this.transactioncount++;
     }
     
-}
+    //this method will get the transaction limit
+    public int getTransactionlLimit()
+    {
+        return this.transactionlLimit;
+        
+    }
+    
+    //this method will set the transaction limit
+    public void setTransactionlLimit(int transactionlLimit)
+    {
+        this.transactionlLimit = transactionlLimit;
+        
+    }
+   
+    //this method will get the max withdrawal from an account
+    public double getMAXWITHDRAWAL()
+    {
+        return this.MAXWITHDRAWAL;
+    }
+    
+    //this method will set the max withdrawal
+    public void setMAXWITHDRAWAL(double MAXWITHDRAWAL)
+    {
+        this.MAXWITHDRAWAL = MAXWITHDRAWAL;
+    }
+    
+}//end of account class
