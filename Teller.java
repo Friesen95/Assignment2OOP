@@ -20,6 +20,18 @@ public class Teller
         ArrayList<Customer> customers = new ArrayList<>();
         double accountNum, balance, amount = 0;
         int choice, customerNum = 0, age = 0;
+        Customer addRegularCustomer = new regularCustomer("RC","Drew", "James", 29);
+        customers.add(addRegularCustomer);
+        addRegularCustomer.createAccount(30);
+        Customer addSeniorCustomer = new seniorCustomer("SNC","Felix", "Felicis",70);
+        customers.add(addSeniorCustomer);
+        addSeniorCustomer.createAccount(30);
+        Customer addStudentCustomer = new studentCustomer("STC", "Emma", "Hilborn","Georgian",18);
+        customers.add(addStudentCustomer);
+        addStudentCustomer.createAccount(30);
+        Customer addBusinessCustomer = new studentCustomer("BC", "Harry", "Potter","Hogwarts",26);
+        customers.add(addBusinessCustomer);
+        addBusinessCustomer.createAccount(30);
         //--hasAccount means they have an account and will be able to continue to the private menu that 
         //is only avaliable for customers 
         //--quit will terminate the program and end everything 
@@ -241,7 +253,7 @@ public class Teller
                             primaryMenu = true;
                             insideMenu = true;
                             // we save their number so that we can find them again once we leave this for loop
-                            customerNum = customers.get(x).getAccountNum();
+                            customerNum = x;
                         }
                     }
                 }
@@ -351,12 +363,13 @@ public class Teller
                 {
                     System.out.println("\n\nNot a valid option. Try Again");
                 }
-                System.out.println("\nat the end of primaryMenu loop");
+                
             }
 
             // have this account menu stay until it is exited out meaning customer left and new one is coming
             while (insideMenu == true) 
-            {
+            { 
+                System.out.println("Welcome " + customers.get(customerNum).getFullName());
                 if (hasAccount == true) 
                 {
                     System.out.println("\nAccount Menu");
@@ -367,7 +380,9 @@ public class Teller
                     System.out.println("4 - View Account Info");
                     System.out.println("5 - Change Account Info");
                     System.out.println("6 - Exit");
+                    // pick a choice and store
                     choice = intHolder.nextInt();
+                    //check if customer has multiple accounts 
                     if (customers.get(customerNum).getNumbersOfAcct() > 1) 
                         multiAccounts = true;
                     if (choice == 1) 
@@ -384,23 +399,31 @@ public class Teller
                         // here is where we will use CustomerNum to let them change info in their account
                         if (customers.get(customerNum).getNumbersOfAcct() > 1) 
                         {
-                            while (choice == 1 || choice == 2) 
+                            do  
                             {
                                 System.out.println("Which account would you like to accss 1 or 2");
                                 choice = intHolder.nextInt();
                                 if (choice == 1) 
                                 {
+                                    if (customers.get(customerNum).getAccount(0).getBalance()<amount)
+                                    {
+                                        continue; 
+                                    }
                                     customers.get(customerNum).getAccount(0).withdraw(amount);
                                 } 
                                 else if (choice == 2) 
                                 {
+                                    if (customers.get(customerNum).getAccount(1).getBalance()<amount)
+                                    {
+                                        continue; 
+                                    }
                                     customers.get(customerNum).getAccount(1).withdraw(amount);
                                 } 
                                 else 
                                 {
                                     System.out.println("Not a valid option");
                                 }
-                            }
+                            }while(!(choice == 1 || choice == 2));
                         } 
                         else 
                         {
@@ -427,7 +450,7 @@ public class Teller
                         {
                             //reset choice to default;
                             choice = 0;
-                            while (choice == 1 || choice == 2) 
+                            while (!(choice == 1 || choice == 2)) 
                             {
                                 System.out.println("Which account would you like to accss 1 or 2");
                                 choice = intHolder.nextInt();
@@ -453,6 +476,23 @@ public class Teller
                     else if (choice == 3) 
                     {
                         System.out.println("Create New Account");
+                        System.out.println("----------------------------------------------------------------");
+                        System.out.println("What kind of account do you want to create");
+                        System.out.println("1 - Chequing");
+                        System.out.println("2 - Credit");
+                        System.out.println("3 - Savings");
+                        System.out.println("4 - Exit");
+                        int newAcctType = intHolder.nextInt();
+                        if(newAcctType ==4)
+                        {
+                            continue;
+                        }
+                        while(newAcctType < 1 && newAcctType > 4)
+                        {
+                            System.out.printf("Sorry but %d is not a valid "
+                                    + "option. Enter 1, 2, 3, or 4.",newAcctType);
+                            newAcctType = intHolder.nextInt();
+                        }
                         System.out.println("How much would you like to put in your account?: ");
                         while (!doubleHolder.hasNextDouble()) 
                         {

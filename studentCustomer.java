@@ -4,21 +4,21 @@
  * and open the template in the editor.
  */
 
-package banking;
+package OOPAssignment2;
 
 /**
  *
  * @author fries_000
  */
 public class studentCustomer extends Customer {
-    // students have a withdraw limit of 500$
+    // students have a limit of taking out 500$
     // have a variable for school name and city
     private String school="";
     
     
-    public studentCustomer(String FirstName, String LastName, String School, int Age) 
+    public studentCustomer(String customerType,String FirstName, String LastName, String School, int Age) 
     {
-        super(FirstName, LastName, Age);
+        super(customerType, FirstName, LastName, Age);
         this.school = School;         
     }
     

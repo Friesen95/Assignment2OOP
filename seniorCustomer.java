@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package banking;
+package OOPAssignment2;
 
 import java.util.ArrayList;
 
@@ -18,9 +18,9 @@ public class seniorCustomer extends Customer  {
     private int age;
     
     
-    public seniorCustomer(String FirstName, String LastName, int Age)
+    public seniorCustomer(String customerType,String FirstName, String LastName,int Age)
     {
-            super(FirstName, LastName, Age);  
+            super(customerType, FirstName, LastName, Age);  
     }
     @Override
     public void setAge(int Age)

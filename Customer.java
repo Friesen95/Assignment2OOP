@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package banking;
+package OOPAssignment2;
 
 import java.util.ArrayList;
 
@@ -18,7 +18,13 @@ public class Customer {
     //all the information one needs to fill in, in order to be a customer
     private String firstName="";
     private String lastName="";
+    private String customerType="";
+    //private String address="";
+    //private String city="";
     private int age;
+   // private String country="";
+    //private String postalcode="";
+    //private String email="";
     private int accountNum=0;
     private int numbersOfAcct=0;
     private Account tempAcct; 
@@ -26,13 +32,20 @@ public class Customer {
     
 //default constructor
 public Customer()
-{}
-
-//Constructor that will creat a cutomer if all fields are filled out 
-public Customer(String FirstName, String LastName, int Age)
 {
+    
+}
+//Constructor that will creat a cutomer if all fields are filled out 
+public Customer(String customerType, String FirstName, String LastName, int Age)
+{
+    this.customerType = customerType;
     this.firstName = FirstName;
     this.lastName = LastName;
+    //this.address= Address;
+    //this.city = City;
+    //this.country= Country;
+    //this.postalcode = PostalCode;
+    //this.email= Email;
     this.age = Age;
     this.accountNum = AccountSupport.getAccountNum();
     
@@ -60,6 +73,69 @@ public String getFullName()
 {
     return this.getFirstName() + " " + this.getLastName();
 }
+
+public int numOfAccts()
+{
+    return this.accountHolder.size();
+}
+
+public String getType()
+{
+    return this.customerType;
+}
+
+//accessors and mutators for the full address of customer
+/*public String getAddress()
+{
+    return this.address.toUpperCase();
+}
+public void setAddress(String newAddress)
+{
+    this.address = newAddress;
+}
+
+public String getCity()
+{
+    return this.city.toUpperCase();
+}
+public void setCity(String newCity)
+{
+    this.city = newCity;
+}
+*/
+/*public String getPostalCode()
+{
+    return this.postalcode;
+}
+public void setPostalCode(String newPC)
+{
+    this.postalcode = newPC;
+}
+
+public String getCountry()
+{
+    return this.country.toUpperCase();
+}
+public void setCountry(String newC)
+{
+    this.country = newC;
+}
+
+public String getFullAddress()
+{
+    return this.getAddress() + ", " + this.getCity() 
+            + ", " + this.getPostalCode() + ", " + this.getCountry();
+}
+
+// accessor and mutator for customers email
+public String getEmail()
+{
+    return this.email;
+}
+public void setEmail(String newEmail)
+{
+    this.email = newEmail;
+}*/
 
 public void setAge(int Age)
 {       

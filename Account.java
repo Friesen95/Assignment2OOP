@@ -1,4 +1,4 @@
-package banking;
+package OOPAssignment2;
 /**
  *
  * @author fries_000

@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package banking;
+package OOPAssignment2;
 
 /**
  *
@@ -12,9 +12,9 @@ package banking;
  */
 public class regularCustomer extends Customer {
     
-    public regularCustomer(String FirstName, String LastName, String City, int age)
+    public regularCustomer(String customerType, String FirstName, String LastName, int age)
     {
-        super(FirstName, LastName, age);
+        super(customerType,FirstName, LastName, age);
     }
     
 }

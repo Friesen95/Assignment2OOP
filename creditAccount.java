@@ -1,6 +1,6 @@
 
 
-package banking;
+package OOPAssignment2;
 
 /**
  *

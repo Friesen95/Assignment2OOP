@@ -1,5 +1,5 @@
 
-package banking;
+package OOPAssignment2;
 
 import java.util.*;
 
