@@ -14,7 +14,7 @@ public class regularCustomer extends Customer {
     
     public regularCustomer(String FirstName, String LastName, String City, int age)
     {
-        super(FirstName, LastName, City, age);
+        super(FirstName, LastName, age);
     }
     
 }

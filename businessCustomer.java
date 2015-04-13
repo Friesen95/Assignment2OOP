@@ -13,9 +13,9 @@ package banking;
 public class businessCustomer extends Customer{
     private String businessName ="";
     
-    public businessCustomer(String FirstName, String LastName, String City,String businessName, int Age)
+    public businessCustomer(String FirstName, String LastName, String businessName, int Age)
     {
-        super(FirstName, LastName, City, Age);
+        super(FirstName, LastName, Age);
         this.businessName = businessName;
     }
     

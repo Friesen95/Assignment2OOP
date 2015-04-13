@@ -19,7 +19,7 @@ public class Teller
         Scanner stringHolder = new Scanner(System.in);
         ArrayList<Customer> customers = new ArrayList<>();
         double accountNum, balance, amount = 0;
-        int choice, customerNum = 0;
+        int choice, customerNum = 0, age = 0;
         //--hasAccount means they have an account and will be able to continue to the private menu that 
         //is only avaliable for customers 
         //--quit will terminate the program and end everything 
@@ -30,7 +30,7 @@ public class Teller
         boolean hasAccount, quit = false, insideMenu = false, primaryMenu, multiAccounts; 
         // input will not be used but is needed to record the fact that the user pressed enter to continue
         //FN = First Name, LN = Last Name
-        String FN, LN, city, input;
+        String FN, LN, school, business, input;
 
         System.out.println("Hello and welcome to Friesens-JBank");
         //the first menu when someone starts the program
@@ -61,29 +61,126 @@ public class Teller
                     System.out.println("Lets make you a part of our family");
                     System.out.println("We will need some information of yours"
                             + "to open an account.");
-                    System.out.println("What is your First Name: ");
-                    FN = stringHolder.nextLine();
-                    System.out.println("What is your Last Name: ");
-                    LN = stringHolder.nextLine();
-                    System.out.println("What city do you live in: ");
-                    city = stringHolder.nextLine();
-                    Customer newCust = new Customer(FN, LN, city);
-                    System.out.println("How much would you like to put in your account?: ");
-                    while (!doubleHolder.hasNextDouble()) 
+                    //Ask what kind of customer
+                    System.out.println("What kind of customer would you like "
+                            + "to create? Enter 1 for regular, 2 for senior, 3 "
+                            + "for student, or 4 for business.");
+                    int custType = intHolder.nextInt();
+                    //Keep asking 'til they pick 1-4
+                    while(custType < 1 || custType > 4)
                     {
-                        System.out.println("Not a valid option");
-                        doubleHolder.next();
+                        System.out.printf("\nSorry but %d is not a valid choice."
+                                + " Please choose 1, 2, 3, or 4.",custType);
+                        custType = intHolder.nextInt();
                     }
-                    balance = doubleHolder.nextDouble();
-                    newCust.createAccount(balance);
-                    customers.add(newCust);
-                    System.out.println("Congradulations you created an account.\n"
-                            + "This is your account number, dont forget it.\n"
-                            + "Account Number: " + newCust.getAccountNum());
-                    hasAccount = true;
-                    primaryMenu = true;
-                    //we just added an account to our list meaning they will be the latest customer
-                    customerNum = customers.lastIndexOf(newCust);
+                    if(custType == 1) //Regular customer
+                    {
+                        System.out.println("What is your First Name: ");
+                        FN = stringHolder.nextLine();
+                        System.out.println("What is your Last Name: ");
+                        LN = stringHolder.nextLine();
+                        System.out.println("How old are you: ");
+                        age = intHolder.nextInt();
+                        Customer newCust = new regularCustomer("RC", FN, LN, age);
+                        System.out.println("How much would you like to put in your account?: ");
+                        while (!doubleHolder.hasNextDouble()) 
+                        {
+                            System.out.println("Not a valid option");
+                            doubleHolder.next();
+                        }
+                        balance = doubleHolder.nextDouble();
+                        newCust.createAccount(balance);
+                        customers.add(newCust);
+                        System.out.println("Congradulations you created an account.\n"
+                                + "This is your account number, dont forget it.\n"
+                                + "Account Number: " + newCust.getAccountNum());
+                        hasAccount = true;
+                        primaryMenu = true;
+                        //we just added an account to our list meaning they will be the latest customer
+                        customerNum = customers.lastIndexOf(newCust);
+                    }
+                    else if(custType == 2) //Senior customer
+                    {
+                        System.out.println("What is your First Name: ");
+                        FN = stringHolder.nextLine();
+                        System.out.println("What is your Last Name: ");
+                        LN = stringHolder.nextLine();
+                        System.out.println("How old are you: ");
+                        age = intHolder.nextInt();
+                        Customer newCust = new seniorCustomer("SNC", FN, LN, age);
+                        System.out.println("How much would you like to put in your account?: ");
+                        while (!doubleHolder.hasNextDouble()) 
+                        {
+                            System.out.println("Not a valid option");
+                            doubleHolder.next();
+                        }
+                        balance = doubleHolder.nextDouble();
+                        newCust.createAccount(balance);
+                        customers.add(newCust);
+                        System.out.println("Congradulations you created an account.\n"
+                                + "This is your account number, dont forget it.\n"
+                                + "Account Number: " + newCust.getAccountNum());
+                        hasAccount = true;
+                        primaryMenu = true;
+                        //we just added an account to our list meaning they will be the latest customer
+                        customerNum = customers.lastIndexOf(newCust);
+                    }
+                    else if(custType == 3) //Student customer
+                    {
+                        System.out.println("What is your First Name: ");
+                        FN = stringHolder.nextLine();
+                        System.out.println("What is your Last Name: ");
+                        LN = stringHolder.nextLine();
+                        System.out.println("What is your school: ");
+                        school = stringHolder.nextLine();
+                        System.out.println("How old are you: ");
+                        age = intHolder.nextInt();
+                        Customer newCust = new studentCustomer("STC", FN, LN, school, age);
+                        System.out.println("How much would you like to put in your account?: ");
+                        while (!doubleHolder.hasNextDouble()) 
+                        {
+                            System.out.println("Not a valid option");
+                            doubleHolder.next();
+                        }
+                        balance = doubleHolder.nextDouble();
+                        newCust.createAccount(balance);
+                        customers.add(newCust);
+                        System.out.println("Congradulations you created an account.\n"
+                                + "This is your account number, dont forget it.\n"
+                                + "Account Number: " + newCust.getAccountNum());
+                        hasAccount = true;
+                        primaryMenu = true;
+                        //we just added an account to our list meaning they will be the latest customer
+                        customerNum = customers.lastIndexOf(newCust);
+                    }
+                    else //Business cusomter
+                    {
+                        System.out.println("What is your First Name: ");
+                        FN = stringHolder.nextLine();
+                        System.out.println("What is your Last Name: ");
+                        LN = stringHolder.nextLine();
+                        System.out.println("What is your buiness: ");
+                        business = stringHolder.nextLine();
+                        System.out.println("How old are you: ");
+                        age = intHolder.nextInt();
+                        Customer newCust = new studentCustomer("BC", FN, LN, business, age);
+                        System.out.println("How much would you like to put in your account?: ");
+                        while (!doubleHolder.hasNextDouble()) 
+                        {
+                            System.out.println("Not a valid option");
+                            doubleHolder.next();
+                        }
+                        balance = doubleHolder.nextDouble();
+                        newCust.createAccount(balance);
+                        customers.add(newCust);
+                        System.out.println("Congradulations you created an account.\n"
+                                + "This is your account number, dont forget it.\n"
+                                + "Account Number: " + newCust.getAccountNum());
+                        hasAccount = true;
+                        primaryMenu = true;
+                        //we just added an account to our list meaning they will be the latest customer
+                        customerNum = customers.lastIndexOf(newCust);
+                    }
                 } 
                 else if (choice == 2) //they have an account, we shall ask for their accountNum and search for it
                 {
@@ -96,10 +193,10 @@ public class Teller
                             hasAccount = true;
                             primaryMenu = true;
                             // we save their number so that we can find them again once we leave this for loop
-                            customerNum = x;
+                            customerNum = customers.get(x).getAccountNum();
                         }
                     }
-                } 
+                }
                 else if (choice == 3) //They want to look up a customer
                 {
                     //Get a search name
@@ -151,23 +248,48 @@ public class Teller
                     {
                         System.out.println("Sorry, but there isn't a customer "
                                 + "with that name!\n");
-                        insideMenu = true;
+                        System.out.println("Would you like to display all "
+                                + "customers? Enter 'y' or 'n'.\n");
+                        String display = stringHolder.nextLine();
+                        while(!display.equalsIgnoreCase("y") &&
+                                !display.equalsIgnoreCase("n"))
+                        {
+                            System.out.printf("\nSorry but %s is not a valid "
+                                    + "choice! Enter 'y' or 'n'.\n");
+                        };
+                        if(display.equalsIgnoreCase("y"))
+                        {
+                            System.out.println("Customer list:");
+                            for(int d = 0; d < customers.size(); d++)
+                            {
+                                System.out.printf("\n%d: %s", d+1,
+                                customers.get(d).getFullName());
+                            }
+                            System.out.println("End of customer list.");
+                        }
+                        else
+                        {
+                            System.out.println("Sorry you didn't find who you "
+                                    + "were looking for!");
+                        }
+                        quit = false;
                     }
                     else
                     {
                         Customer custSearchResult = customers.get(search);
-                        System.out.printf("\nFull name: %s. Age: %d. City: %s. "
-                                + "# of accounts: %d", 
+                        System.out.printf("\nType: %s. Full name: %s. Age: %d. "
+                                + "# of accounts: %d",
+                                custSearchResult.getType(),
                                 custSearchResult.getFullName(),
                                 custSearchResult.getAge(),
-                                custSearchResult.getCity(),
                                 custSearchResult.numOfAccts());
                         quit = false;
                     }
                 }
                 else if (choice == 4) //They want bank info
                 {
-                    
+                    String bankInfo = Bank.bankInfo(customers);
+                    System.out.println(bankInfo);
                 }
                 else if (choice == 5) 
                 {
@@ -182,8 +304,7 @@ public class Teller
                 }
             }
 
-
-            insideMenu = true;
+            quit = false;
             // have this account menu stay until it is exited out meaning customer left and new one is coming
             while (insideMenu == true) 
             {
@@ -299,7 +420,6 @@ public class Teller
                         System.out.println("Press enter to Exit");
                         //record choice and displau info
                         System.out.print("\nAccount Holder Name: " + customers.get(customerNum).getFullName());
-                        System.out.print("\nAccount Holder City: " + customers.get(customerNum).getCity());
                         System.out.print("\nAccount Holder # of Transactions: " + customers.get(customerNum).getNumbersOfAcct());
                         System.out.print("\nAccount Holder #: " + customers.get(customerNum).getAccountNum());
                         System.out.print("\nAccount Balance: " + customers.get(customerNum).getAccount(0).getBalance());
@@ -317,8 +437,7 @@ public class Teller
                             System.out.println("\nWhat Information Would You like to change?");
                             System.out.println("1 - First Name");
                             System.out.println("2 - Last Name");
-                            System.out.println("3 - City");
-                            System.out.println("4 - Exit");
+                            System.out.println("3 - Exit");
                             choice = intHolder.nextInt();
                             if (choice == 1) 
                             {
@@ -335,13 +454,6 @@ public class Teller
                                 customers.get(customerNum).setLastName(stringHolder.nextLine());
                             } 
                             else if (choice == 3) 
-                            {
-                                System.out.println("Change City");
-                                System.out.println("Old City: " + customers.get(customerNum).getCity());
-                                System.out.println("What will be the new city? ");
-                                customers.get(customerNum).setCity(stringHolder.nextLine());
-                            } 
-                            else if (choice == 4) 
                             {
                                 continue;
                             } 

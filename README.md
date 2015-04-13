@@ -1,3 +1,2 @@
-# Assignment2OOP
-Assignment 2 for object oriented programming 
-Okay Emma, MArco and Matt I think i finally figured this garbage out get crazy and have fun :)
+# OOP-Assignment2
+assignment number 2 for out oop class in school

@@ -18,9 +18,9 @@ public class seniorCustomer extends Customer  {
     private int age;
     
     
-    public seniorCustomer(String FirstName, String LastName,String City ,int Age)
+    public seniorCustomer(String FirstName, String LastName, int Age)
     {
-            super(FirstName, LastName, City, Age);  
+            super(FirstName, LastName, Age);  
     }
     @Override
     public void setAge(int Age)
