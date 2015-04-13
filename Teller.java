@@ -1,4 +1,4 @@
-package banking;
+package OOPAssignment2;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -83,12 +83,24 @@ public class Teller
                         age = intHolder.nextInt();
                         Customer newCust = new regularCustomer("RC", FN, LN, age);
                         System.out.println("How much would you like to put in your account?: ");
+                         //if the entered amount is not a double
                         while (!doubleHolder.hasNextDouble()) 
                         {
                             System.out.println("Not a valid option");
                             doubleHolder.next();
                         }
                         balance = doubleHolder.nextDouble();
+                        while(balance <= 0)
+                        {
+                            System.out.println("You must choose a balance greater"
+                                    + "than $0.");
+                            while (!doubleHolder.hasNextDouble()) 
+                            {
+                            System.out.println("Not a valid option");
+                            doubleHolder.next();
+                            }
+                            balance = doubleHolder.nextDouble();
+                        }
                         newCust.createAccount(balance);
                         customers.add(newCust);
                         System.out.println("Congradulations you created an account.\n"
@@ -115,6 +127,17 @@ public class Teller
                             doubleHolder.next();
                         }
                         balance = doubleHolder.nextDouble();
+                        while(balance <= 0)
+                        {
+                            System.out.println("You must choose a balance greater"
+                                    + "than $0.");
+                            while (!doubleHolder.hasNextDouble()) 
+                            {
+                            System.out.println("Not a valid option");
+                            doubleHolder.next();
+                            }
+                            balance = doubleHolder.nextDouble();
+                        }
                         newCust.createAccount(balance);
                         customers.add(newCust);
                         System.out.println("Congradulations you created an account.\n"
@@ -143,6 +166,17 @@ public class Teller
                             doubleHolder.next();
                         }
                         balance = doubleHolder.nextDouble();
+                        while(balance <= 0)
+                        {
+                            System.out.println("You must choose a balance greater"
+                                    + "than $0.");
+                            while (!doubleHolder.hasNextDouble()) 
+                            {
+                            System.out.println("Not a valid option");
+                            doubleHolder.next();
+                            }
+                            balance = doubleHolder.nextDouble();
+                        }
                         newCust.createAccount(balance);
                         customers.add(newCust);
                         System.out.println("Congradulations you created an account.\n"
@@ -165,12 +199,25 @@ public class Teller
                         age = intHolder.nextInt();
                         Customer newCust = new studentCustomer("BC", FN, LN, business, age);
                         System.out.println("How much would you like to put in your account?: ");
+                        //if the entered amount is not a double
                         while (!doubleHolder.hasNextDouble()) 
                         {
                             System.out.println("Not a valid option");
                             doubleHolder.next();
                         }
-                        balance = doubleHolder.nextDouble();
+                        
+                         balance = doubleHolder.nextDouble();
+                        while(balance <= 0)
+                        {
+                            System.out.println("You must choose a balance greater"
+                                    + "than $0.");
+                            while (!doubleHolder.hasNextDouble()) 
+                            {
+                            System.out.println("Not a valid option");
+                            doubleHolder.next();
+                            }
+                            balance = doubleHolder.nextDouble();
+                        }
                         newCust.createAccount(balance);
                         customers.add(newCust);
                         System.out.println("Congradulations you created an account.\n"
@@ -192,6 +239,7 @@ public class Teller
                         {   //we let hasAccount = true so that they can access the next step 
                             hasAccount = true;
                             primaryMenu = true;
+                            insideMenu = true;
                             // we save their number so that we can find them again once we leave this for loop
                             customerNum = customers.get(x).getAccountNum();
                         }
@@ -287,7 +335,7 @@ public class Teller
                     }
                 }
                 else if (choice == 4) //They want bank info
-                {
+                { 
                     String bankInfo = Bank.bankInfo(customers);
                     System.out.println(bankInfo);
                 }
@@ -295,6 +343,7 @@ public class Teller
                 {
                     System.out.println("\nThank you for trying Error 404's "
                             + "JBank.\n Hope to see you again soon. Good Bye.");
+                    // need to shut down the program
                     primaryMenu = true;
                     quit = true;
                 } 
@@ -302,9 +351,9 @@ public class Teller
                 {
                     System.out.println("\n\nNot a valid option. Try Again");
                 }
+                System.out.println("\nat the end of primaryMenu loop");
             }
 
-            quit = false;
             // have this account menu stay until it is exited out meaning customer left and new one is coming
             while (insideMenu == true) 
             {
@@ -384,11 +433,11 @@ public class Teller
                                 choice = intHolder.nextInt();
                                 if (choice == 1) 
                                 {
-                                    customers.get(customerNum).getAccount(0).deposite(amount);
+                                    customers.get(customerNum).getAccount(0).deposit(amount);
                                 }
                                 else if (choice == 2) 
                                 {
-                                    customers.get(customerNum).getAccount(1).deposite(amount);
+                                    customers.get(customerNum).getAccount(1).deposit(amount);
                                 } 
                                 else 
                                 {
@@ -398,7 +447,7 @@ public class Teller
                         } 
                         else 
                         {
-                            customers.get(customerNum).getAccount(0).deposite(amount);
+                            customers.get(customerNum).getAccount(0).deposit(amount);
                         }
                     } 
                     else if (choice == 3) 
@@ -475,5 +524,6 @@ public class Teller
                 }
             }
         }
+        System.out.print("Good bye and thank you for visiting out JBANK");
     }
 }
