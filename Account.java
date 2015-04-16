@@ -11,6 +11,7 @@ public class Account
     private double MAXWITHDRAWAL = 1000; 
     private int transactioncount = 0;
     private int transactionlLimit;
+    protected double transferFunds;
     
     //default constructor
     public Account()
@@ -93,8 +94,17 @@ public class Account
             this.acctBalance = this.acctBalance + amount;
             return true;
         }
-        else 
-            return false;
+        //TT = transfer to; TF = transfer from
+        else if (typeOfChange.equals("TT"))
+        {
+            this.acctBalance = this.acctBalance + this.transferFunds;
+        }
+        else if(typeOfChange.equals("TF"))
+        {
+            this.acctBalance = this.acctBalance - this.transferFunds;
+        }
+         
+        return false;
         
     }
     
@@ -134,6 +144,22 @@ public class Account
     public void setMAXWITHDRAWAL(double MAXWITHDRAWAL)
     {
         this.MAXWITHDRAWAL = MAXWITHDRAWAL;
+    }
+    
+    public double getTransferFunds(double amount)
+    {
+        //will only transfer if there is a valid amount entered and account balance has funds to transfer
+        if(amount < 0 || amount > acctBalance)
+        {
+            System.out.println("Amount entered is invalid");
+        }
+        
+        this.transferFunds = amount;
+        this.updateBalance("TF", amount);
+        this.updateBalance("TT", amount);
+        
+        return transferFunds;
+        
     }
     
 }//end of account class

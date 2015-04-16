@@ -9,7 +9,7 @@ package OOPAssignment2;
 public class creditAccount extends Account
 {
     private double creditLimit;
-    private double existingFee;
+    protected double existingFee;
     
     /**
     * Credit Account constructor create a an account for a regular customer on 
@@ -56,6 +56,8 @@ public class creditAccount extends Account
         }
         
     }//end of creditAccount constructor
+    
+    
     
     //this method will allow a customer to pay thier balance
     public boolean pay(double amount)
